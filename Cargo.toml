@@ -12,7 +12,7 @@ cortex-m-semihosting = "0.3.3"
 cortex-m-rtfm = "0.5.1"
 panic-semihosting = "0.5.3"
 embedded-graphics = "0.6.0-alpha.3"
-ssd1306 = { path = "../ssd1306" }
+ssd1306 = "0.3.0-alpha.3"
 
 stm32f4xx-hal = {version = "0.6", features = ["stm32f446"]}
 stm32f4 = {version = "0.8", features = [ "stm32f446", "rt" ]}
