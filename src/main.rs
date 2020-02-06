@@ -3,7 +3,7 @@
 #![no_main]
 
 use core::convert::TryInto;
-use panic_semihosting as _;
+use panic_itm as _;
 use cortex_m::iprintln;
 use rtfm::cyccnt::{Instant, U32Ext as _ };
 use stm32f4xx_hal::{prelude::*, i2c::I2c, gpio::{Alternate, AF4, gpiob::{PB8, PB9}}, stm32};
@@ -46,13 +46,13 @@ const APP: () = {
         let clocks = rcc.cfgr.sysclk(48.mhz()).freeze();
         let gpiob = cx.device.GPIOB.split();
 
-        let scl = gpiob.pb8.into_alternate_af4();
-        let sda = gpiob.pb9.into_alternate_af4();
+        let scl = gpiob.pb8.into_alternate_af4().set_open_drain();
+        let sda = gpiob.pb9.into_alternate_af4().set_open_drain();
 
         let i2c = I2c::i2c1(
             cx.device.I2C1,
             (scl, sda),
-            400.khz(),
+            100.khz(),
             clocks
         );
 
